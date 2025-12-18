@@ -35,10 +35,10 @@ Sistema de gestión de álbumes de colección desarrollado con Spring Boot. Perm
 
 | Tecnología      | Versión | Propósito                       |
 | --------------- | ------- | ------------------------------- |
-| Java            | 17+     | Lenguaje de programación        |
-| Spring Boot     | 3.x     | Framework principal             |
+| Java            | 21      | Lenguaje de programación        |
+| Spring Boot     | 3.5.8   | Framework principal             |
 | Spring Data JPA | -       | Persistencia de datos           |
-| MySQL           | 8.x     | Base de datos                   |
+| PostgreSQL      | 8.x     | Base de datos                   |
 | Lombok          | -       | Reducción de código boilerplate |
 | Validation      | -       | Validación de datos             |
 | Swagger/OpenAPI | -       | Documentación de API            |
@@ -53,12 +53,13 @@ Sistema de gestión de álbumes de colección desarrollado con Spring Boot. Perm
 
 **Inicio:** 18 de diciembre de 2025  
 **Duración:** 9 días (3 Sprints de 3 días)  
-**Progreso Global:** 0% (0/27 tareas completadas)
+**Progreso Global:** 11% (3/27 tareas completadas)  
+**Última actualización:** 18 de diciembre de 2025
 
 ### Progress Dashboard
 
 ```
-Sprint 1: [░░░░░░░░░░] 0/9 tareas   - Cimientos y Gestión de Álbumes
+Sprint 1: [███░░░░░░░] 3/9 tareas   - Cimientos y Gestión de Álbumes (EN PROGRESO)
 Sprint 2: [░░░░░░░░░░] 0/9 tareas   - Lógica de Negocio (Láminas)
 Sprint 3: [░░░░░░░░░░] 0/9 tareas   - Multimedia, Testing y Documentación
 ```
@@ -75,8 +76,8 @@ Sprint 3: [░░░░░░░░░░] 0/9 tareas   - Multimedia, Testing y 
 
 ### Prerrequisitos
 
-- Java JDK 17 o superior
-- MySQL 8.x
+- Java JDK 21
+- PostgreSQL 
 - Maven 3.6+
 - Git
 - Postman (para pruebas)
@@ -93,20 +94,20 @@ cd collectorsallbum
 2. **Configurar la base de datos**
 
 ```sql
-CREATE DATABASE coleccion_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'coleccion_user'@'localhost' IDENTIFIED BY 'tu_password';
-GRANT ALL PRIVILEGES ON coleccion_db.* TO 'coleccion_user'@'localhost';
-FLUSH PRIVILEGES;
+CREATE DATABASE coleccion_db;
+CREATE USER coleccion_user WITH PASSWORD 'tu_password';
+GRANT ALL PRIVILEGES ON DATABASE coleccion_db TO coleccion_user;
 ```
 
 3. **Configurar application.properties**
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/coleccion_db
+spring.datasource.url=jdbc:postgresql://localhost:5432/coleccion_db
 spring.datasource.username=coleccion_user
 spring.datasource.password=tu_password
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 ```
 
 4. **Ejecutar la aplicación**
@@ -176,10 +177,10 @@ git push origin feature/album-crud
 
 **Tareas:**
 
-- [ ] Inicializar proyecto en Spring Initializr
-- [ ] Crear repositorio en GitHub
-- [ ] Configurar `application.properties`
-- [ ] Crear base de datos `coleccion_db` en MySQL
+- [x] Inicializar proyecto en Spring Initializr
+- [x] Crear repositorio en GitHub
+- [x] Configurar `application.properties`
+- [ ] Crear base de datos `coleccion_db` en PostgreSQL
 - [ ] Configurar Swagger/OpenAPI
 - [ ] Verificar que corre en localhost:8080
 
@@ -187,9 +188,9 @@ git push origin feature/album-crud
 
 **Checklist de Validación:**
 
-- [ ] El proyecto compila sin errores
+- [x] El proyecto compila sin errores
 - [ ] Swagger UI accesible en `/swagger-ui.html`
-- [ ] Conexión a MySQL exitosa
+- [ ] Conexión a PostgreSQL exitosa
 
 ---
 
