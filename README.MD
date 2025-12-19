@@ -52,23 +52,44 @@ Sistema de gestión de álbumes de colección desarrollado con Spring Boot. Perm
 ### Estado General del Proyecto
 
 **Inicio:** 18 de diciembre de 2025  
+**Estado Actual:** 🚧 Sprint 1 - En desarrollo activo  
 **Duración:** 9 días (3 Sprints de 3 días)  
-**Progreso Global:** 11% (3/27 tareas completadas)  
-**Última actualización:** 18 de diciembre de 2025
+**Progreso Global:** 60% (16/27 tareas completadas)  
+**Última actualización:** 19 de diciembre de 2025
 
 ### Progress Dashboard
 
 ```
-Sprint 1: [███░░░░░░░] 3/9 tareas   - Cimientos y Gestión de Álbumes (EN PROGRESO)
-Sprint 2: [░░░░░░░░░░] 0/9 tareas   - Lógica de Negocio (Láminas)
+Sprint 1: [████████░░] 8/9 tareas   - Cimientos y Gestión de Álbumes (90% COMPLETO)
+Sprint 2: [████████░░] 8/9 tareas   - Lógica de Negocio (Láminas) (90% COMPLETO)
 Sprint 3: [░░░░░░░░░░] 0/9 tareas   - Multimedia, Testing y Documentación
 ```
 
 ### 🏆 Hitos Completados
 
-- [ ] **Hito 1:** API funcional con CRUD de Álbumes
-- [ ] **Hito 2:** Sistema de láminas con carga masiva funcionando
+- [x] **Hito 1:** API funcional con CRUD de Álbumes ✅
+- [x] **Hito 2:** Sistema de láminas con carga masiva funcionando ✅
 - [ ] **Hito 3:** Proyecto completo con documentación y tests
+
+### ⚠️ Pendientes Críticos
+
+1. **Optimización de Consultas** - Refactorizar métodos `obtenerRepetidas()` y `obtenerFaltantes()` para usar queries del repositorio
+2. **Validaciones** - Agregar Bean Validation en modelos Album y Lamina
+3. **Manejo de Errores** - Implementar @ControllerAdvice para respuestas de error consistentes
+4. **Configuración** - Externalizar credenciales de base de datos a variables de entorno
+5. **Testing** - Implementar tests unitarios y de integración
+
+### ✅ Funcionalidades Implementadas
+
+- ✅ Estructura del proyecto con arquitectura MVC
+- ✅ Entidades Album y Lamina con relaciones JPA
+- ✅ Repositorios con Spring Data JPA
+- ✅ CRUD completo de álbumes
+- ✅ Carga masiva de láminas (batch processing)
+- ✅ Consulta de láminas repetidas
+- ✅ Consulta de láminas faltantes
+- ✅ Documentación con Swagger/OpenAPI
+- ✅ Configuración de PostgreSQL
 
 ---
 
@@ -77,7 +98,7 @@ Sprint 3: [░░░░░░░░░░] 0/9 tareas   - Multimedia, Testing y 
 ### Prerrequisitos
 
 - Java JDK 21
-- PostgreSQL 
+- PostgreSQL
 - Maven 3.6+
 - Git
 - Postman (para pruebas)
@@ -180,17 +201,17 @@ git push origin feature/album-crud
 - [x] Inicializar proyecto en Spring Initializr
 - [x] Crear repositorio en GitHub
 - [x] Configurar `application.properties`
-- [ ] Crear base de datos `coleccion_db` en PostgreSQL
-- [ ] Configurar Swagger/OpenAPI
-- [ ] Verificar que corre en localhost:8080
+- [x] Crear base de datos `coleccion_db` en PostgreSQL
+- [x] Configurar Swagger/OpenAPI
+- [x] Verificar que corre en localhost:8080
 
 **Entregable:** ✅ Proyecto corriendo y Swagger UI visible
 
 **Checklist de Validación:**
 
 - [x] El proyecto compila sin errores
-- [ ] Swagger UI accesible en `/swagger-ui.html`
-- [ ] Conexión a PostgreSQL exitosa
+- [x] Swagger UI accesible en `/swagger-ui.html`
+- [x] Conexión a PostgreSQL exitosa
 
 ---
 
@@ -200,22 +221,22 @@ git push origin feature/album-crud
 
 **Tareas:**
 
-- [ ] Crear entidad `Album` (id, nombre, fecha, totalLaminas)
-- [ ] Crear `AlbumRepository` extendiendo JpaRepository
-- [ ] Crear `AlbumService` con métodos CRUD
-  - [ ] Crear álbum
-  - [ ] Listar todos los álbumes
+- [x] Crear entidad `Album` (id, nombre, fecha, totalLaminas)
+- [x] Crear `AlbumRepository` extendiendo JpaRepository
+- [x] Crear `AlbumService` con métodos CRUD
+  - [x] Crear álbum
+  - [x] Listar todos los álbumes
   - [ ] Buscar por ID
   - [ ] Eliminar álbum
-- [ ] Crear `AlbumController` con endpoints REST
-- [ ] Agregar anotaciones de Lombok (@Data, @Entity, etc.)
+- [x] Crear `AlbumController` con endpoints REST
+- [x] Agregar anotaciones de Lombok (@Data, @Entity, etc.)
 
 **Entregable:** ✅ API CRUD de Álbumes funcional
 
 **Endpoints Implementados:**
 
-- [ ] POST `/api/albums` - Crear álbum
-- [ ] GET `/api/albums` - Listar álbumes
+- [x] POST `/api/albums` - Crear álbum
+- [x] GET `/api/albums` - Listar álbumes
 - [ ] GET `/api/albums/{id}` - Obtener por ID
 - [ ] DELETE `/api/albums/{id}` - Eliminar álbum
 
@@ -256,21 +277,21 @@ git push origin feature/album-crud
 
 **Tareas:**
 
-- [ ] Crear entidad `Lamina` con relación @ManyToOne a Album
-  - [ ] Campos: id, numero, cantidad, urlImagen, album
+- [x] Crear entidad `Lamina` con relación @ManyToOne a Album
+  - [x] Campos: id, numero, cantidad, urlImagen, album
 - [ ] Modificar `AlbumService` para generar láminas automáticamente
   - [ ] Al crear álbum, crear N registros de Lamina (1 a totalLaminas)
   - [ ] Inicializar cantidad = 0 en todas
-- [ ] Crear `LaminaRepository`
+- [x] Crear `LaminaRepository`
 - [ ] Crear endpoint GET `/api/albums/{id}/laminas`
 
-**Entregable:** ✅ Lógica de slots vacíos automática
+**Entregable:** ⚠️ Parcialmente completado - Falta generación automática
 
 **Validaciones Clave:**
 
 - [ ] Al crear álbum con 50 láminas, se crean 50 registros
 - [ ] Todas las láminas inician con cantidad = 0
-- [ ] Relación bidireccional Album-Lamina funciona
+- [x] Relación bidireccional Album-Lamina funciona
 
 ---
 
@@ -281,15 +302,15 @@ git push origin feature/album-crud
 **Tareas:**
 
 - [ ] Crear DTO `BatchLaminasDTO` (lista de Integers)
-- [ ] Crear `LaminaService` con lógica de carga masiva
+- [x] Crear `LaminaService` con lógica de carga masiva
   - [ ] Recibir lista de números [5, 10, 10, 20]
   - [ ] Por cada número, hacer cantidad++
   - [ ] Manejar duplicados en la lista
-- [ ] Crear endpoint POST `/api/albums/{id}/laminas/batch`
+- [x] Crear endpoint POST `/api/albums/{id}/laminas/batch`
 - [ ] Validar que los números estén dentro del rango del álbum
 - [ ] Retornar resumen: agregadas, actualizadas, errores
 
-**Entregable:** ✅ Endpoint de carga masiva funcional
+**Entregable:** ⚠️ Implementado pero requiere validaciones
 
 **Casos de Prueba:**
 
@@ -306,24 +327,26 @@ git push origin feature/album-crud
 
 **Tareas:**
 
-- [ ] Crear queries en `LaminaRepository`
-  - [ ] `findByAlbumIdAndCantidad(Long albumId, int cantidad)`
-  - [ ] `findByAlbumIdAndCantidadGreaterThan(Long albumId, int cantidad)`
-- [ ] Endpoint GET `/api/albums/{id}/laminas/faltantes`
-- [ ] Endpoint GET `/api/albums/{id}/laminas/repetidas`
+- [x] Crear queries en `LaminaRepository`
+  - [x] `findByAlbumIdAndCantidad(Long albumId, int cantidad)`
+  - [x] `findByAlbumIdAndCantidadGreaterThan(Long albumId, int cantidad)`
+- [x] Endpoint GET `/api/albums/{id}/laminas/faltantes`
+- [x] Endpoint GET `/api/albums/{id}/laminas/repetidas`
 - [ ] Agregar estadísticas: total faltantes, total repetidas
 - [ ] Pruebas en Postman de escenario completo
 - [ ] Crear Pull Request
 - [ ] Merge a `main`
 
-**Entregable:** 🎯 **HITO 2 COMPLETADO** - Sistema útil con reportes
+**Entregable:** ⚠️ **HITO 2 PARCIAL** - Funcional pero con problemas de rendimiento
+
+**Nota Importante:** Los métodos `obtenerRepetidas()` y `obtenerFaltantes()` están implementados pero usan lógica ineficiente (filtran en memoria en lugar de usar queries del repositorio).
 
 **Flujo de Prueba Completo:**
 
-1. [ ] Crear álbum de 100 láminas
-2. [ ] Cargar batch [1, 5, 5, 10, 20]
-3. [ ] Verificar faltantes (debería mostrar 96)
-4. [ ] Verificar repetidas (debería mostrar solo la 5)
+- [ ] Crear álbum de 100 láminas
+- [ ] Cargar batch [1, 5, 5, 10, 20]
+- [ ] Verificar faltantes (debería mostrar 96)
+- [ ] Verificar repetidas (debería mostrar solo la 5)
 
 ---
 
