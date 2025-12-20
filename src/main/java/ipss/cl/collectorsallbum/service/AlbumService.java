@@ -30,6 +30,16 @@ public class AlbumService {
         return albumRepository.findAll();
     }
 
+    // Operación CRUD: Obtener álbum por ID [cite: 7]
+    public Album obtenerAlbumPorId(Long id) {
+        return albumRepository.findById(id).orElse(null);
+    }
+
+    // Operación CRUD: Eliminar álbum por ID [cite: 7]
+    public void eliminarAlbum(Long id) {
+        albumRepository.deleteById(id);
+    }
+
     // Funcionalidad Especial: Obtener láminas repetidas 
     public List<Lamina> obtenerRepetidas(Long albumId) {
         List<Lamina> todas = laminaRepository.findAll();
