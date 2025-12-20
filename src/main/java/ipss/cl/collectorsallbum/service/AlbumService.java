@@ -1,7 +1,6 @@
 package ipss.cl.collectorsallbum.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,18 +31,12 @@ public class AlbumService {
 
     // Funcionalidad Especial: Obtener láminas repetidas 
     public List<Lamina> obtenerRepetidas(Long albumId) {
-        List<Lamina> todas = laminaRepository.findAll();
-        return todas.stream()
-                .filter(l -> l.getAlbum().getId().equals(albumId) && l.getCantidad() > 1)
-                .collect(Collectors.toList());
+        return laminaRepository.findByAlbumIdAndCantidadGreaterThan(albumId, 1);
     }
 
     // Funcionalidad Especial: Obtener láminas faltantes 
     public List<Lamina> obtenerFaltantes(Long albumId) {
-        List<Lamina> todas = laminaRepository.findAll();
-        return todas.stream()
-                .filter(l -> l.getAlbum().getId().equals(albumId) && l.getCantidad() == 0)
-                .collect(Collectors.toList());
+        return laminaRepository.findByAlbumIdAndCantidad(albumId, 0);
     }
     
     // Funcionalidad Especial: Carga masiva de láminas 
