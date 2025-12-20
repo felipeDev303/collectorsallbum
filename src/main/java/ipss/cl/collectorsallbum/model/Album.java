@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -25,6 +26,10 @@ public class Album {
     
     @NotNull(message = "La fecha de lanzamiento no puede ser nula")
     private LocalDate fechaLanzamiento;
+    
+    @NotNull(message = "El total de láminas no puede ser nulo")
+    @Min(value = 1, message = "El álbum debe tener al menos 1 lámina")
+    private Integer totalLaminas;
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<Lamina> laminas;
