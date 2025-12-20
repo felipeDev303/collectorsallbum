@@ -3,7 +3,9 @@ package ipss.cl.collectorsallbum.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,19 +37,32 @@ public class AlbumController {
         return ResponseEntity.ok(albumService.listarAlbumes());
     }
 
-    // 3. Cargar listado de láminas masivamente [cite: 40]
+    // 3. Obtener álbum por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Album> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(albumService.obtenerAlbumPorId(id));
+    }
+
+    // 4. Eliminar álbum por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarAlbum(@PathVariable Long id) {
+        albumService.eliminarAlbum(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    // 5. Cargar listado de láminas masivamente [cite: 40]
     @PostMapping("/laminas/carga-masiva")
     public ResponseEntity<List<Lamina>> cargarLaminas(@RequestBody List<Lamina> laminas) {
         return ResponseEntity.ok(albumService.cargarLaminas(laminas));
     }
 
-    // 4. Obtener láminas repetidas y su cantidad 
+    // 6. Obtener láminas repetidas y su cantidad 
     @GetMapping("/{id}/repetidas")
     public ResponseEntity<List<Lamina>> getRepetidas(@PathVariable Long id) {
         return ResponseEntity.ok(albumService.obtenerRepetidas(id));
     }
 
-    // 5. Obtener láminas faltantes 
+    // 7. Obtener láminas faltantes 
     @GetMapping("/{id}/faltantes")
     public ResponseEntity<List<Lamina>> getFaltantes(@PathVariable Long id) {
         return ResponseEntity.ok(albumService.obtenerFaltantes(id));

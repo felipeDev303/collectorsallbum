@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import ipss.cl.collectorsallbum.exception.ResourceNotFoundException;
 import ipss.cl.collectorsallbum.model.Album;
 import ipss.cl.collectorsallbum.model.Lamina;
 import ipss.cl.collectorsallbum.repository.AlbumRepository;
@@ -50,10 +52,24 @@ public class AlbumService {
         return albumRepository.findAll();
     }
 
+    public Album obtenerAlbumPorId(Long id) {
+        return albumRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Álbum", "id", id));
+    }
+
+    public void eliminarAlbum(Long id) {
+        if (!albumRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Álbum", "id", id);
+        }
+        albumRepository.deleteById(id);
+    }
+
     /**
      * Devuelve láminas repetidas (Cantidad > 1) [cite: 41]
      */
     public List<Lamina> obtenerRepetidas(Long albumId) {
+        // Verificar que el álbum existe
+        obtenerAlbumPorId(albumId);
         return laminaRepository.findByAlbumIdAndCantidadGreaterThan(albumId, 1);
     }
 
@@ -61,6 +77,8 @@ public class AlbumService {
      * Devuelve láminas faltantes (Cantidad == 0) [cite: 41]
      */
     public List<Lamina> obtenerFaltantes(Long albumId) {
+        // Verificar que el álbum existe
+        obtenerAlbumPorId(albumId);
         return laminaRepository.findByAlbumIdAndCantidad(albumId, 0);
     }
     
