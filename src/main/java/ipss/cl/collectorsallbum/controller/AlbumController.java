@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import ipss.cl.collectorsallbum.model.Album;
 import ipss.cl.collectorsallbum.model.Lamina;
 import ipss.cl.collectorsallbum.service.AlbumService;
@@ -24,7 +25,7 @@ public class AlbumController {
 
     // 1. Crear un nuevo álbum (CRUD) [cite: 36]
     @PostMapping
-    public ResponseEntity<Album> crearAlbum(@RequestBody Album album) {
+    public ResponseEntity<Album> crearAlbum(@Valid @RequestBody Album album) {
         return ResponseEntity.ok(albumService.guardarAlbum(album));
     }
 

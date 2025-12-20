@@ -20,7 +20,7 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotBlank(message = "El nombre del álbum es obligatorio")
+    @NotBlank(message = "El nombre del álbum no puede estar vacío")
     private String nombre; 
     
     @NotNull(message = "La fecha de lanzamiento no puede ser nula")
