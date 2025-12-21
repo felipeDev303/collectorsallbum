@@ -7,5 +7,5 @@ import ipss.cl.collectorsallbum.model.Album;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Long> {
-    // Aquí puedes agregar métodos de búsqueda personalizados si fuera necesario
+
 }

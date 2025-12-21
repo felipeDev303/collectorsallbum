@@ -21,10 +21,6 @@ public class AlbumService {
     @Autowired
     private LaminaRepository laminaRepository;
 
-    /**
-     * Crea un álbum y genera automáticamente sus láminas (Sprint 2 - Día 4)
-     * Requerimiento: "Gestionar colecciones desde la creación hasta el seguimiento" 
-     */
     @Transactional
     public Album guardarAlbum(Album album) {
         // Primero guardamos el álbum para obtener su ID
